@@ -1,0 +1,29 @@
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'registros/css/registro.css' %}">
+    <title>Registrar Salida</title>
+</head>
+<body>
+    <h1>Registrar Salida</h1>
+    
+    {% if vehiculos %}
+        <form method="POST" action="{% url 'registros:registrar_salida' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="matricula">Selecciona Vehículo:</label>
+                <select name="matricula" id="matricula" required>
+                    <option value="">Seleccionar Vehículo</option>
+                    {% for vehiculo in vehiculos %}
+                        <option value="{{ vehiculo.matricula }}">{{ vehiculo.matricula }} - {{ vehiculo.marca }} {{ vehiculo.modelo }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit">Registrar Salida</button>
+        </form>
+    {% else %}
+        <p>No hay vehículos disponibles para registrar salida.</p>
+    {% endif %}
+    
+    <a href="{% url 'registros:index' %}">Volver a Registros</a>
+</body>

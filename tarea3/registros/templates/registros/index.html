@@ -1,0 +1,61 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'registros/css/index.css' %}">
+    <title>Registros de Entrada y Salida</title>
+</head>
+<body>
+    <h1>Registros de Entrada y Salida</h1>
+    <a href="{% url 'condominio:index' %}">Ir a Pagina Principal</a>
+    <div style="display: flex; justify-content: space-between;">
+        <div>
+            <h2>Registros de Entrada</h2>
+            <a href="{% url 'registros:registrar_entrada' %}">Registrar Nueva Entrada</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Matrícula</th>
+                        <th>Fecha y Hora de Entrada</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for registro in registros_entrada %}
+                    <tr>
+                        <td>{{ registro.vehiculo.matricula }}</td>
+                        <td>{{ registro.fecha_hora_entrada }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="2">No hay registros de entrada.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h2>Registros de Salida</h2>
+            <a href="{% url 'registros:registrar_salida' %}">Registrar Nueva Salida</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Matrícula</th>
+                        <th>Fecha y Hora de Entrada</th>
+                        <th>Fecha y Hora de Salida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for registro in registros_salida %}
+                    <tr>
+                        <td>{{ registro.vehiculo.matricula }}</td>
+                        <td>{{ registro.fecha_hora_entrada }}</td>
+                        <td>{{ registro.fecha_hora_salida }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3">No hay registros de salida.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>

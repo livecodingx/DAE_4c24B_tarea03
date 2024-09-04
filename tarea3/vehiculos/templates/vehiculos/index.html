@@ -1,0 +1,42 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'vehiculos/css/index.css' %}">
+    <title>Lista de Vehículos</title>
+</head>
+<body>
+    <h1>Lista de Vehículos</h1>
+    <div style="display: flex; justify-content: space-between;">
+        <a href="{% url 'vehiculos:registrar_vehiculo' %}">Agregar Nuevo Vehiculo</a>
+        <a href="{% url 'condominio:index' %}">Ir a Pagina Principal</a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Matrícula</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Color</th>
+                <th>Propietario</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vehiculo in vehiculos %}
+            <tr>
+                <td>{{ vehiculo.matricula }}</td>
+                <td>{{ vehiculo.marca }}</td>
+                <td>{{ vehiculo.modelo }}</td>
+                <td>{{ vehiculo.color }}</td>
+                <td>{{ vehiculo.propietario.nombre_completo }}</td>
+                <td>
+                    <!-- Aquí podrías añadir enlaces para editar o eliminar el vehículo -->
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No hay vehículos registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>

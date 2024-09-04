@@ -1,0 +1,15 @@
+
+<head>
+    
+    <title></title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'condominio/css/index.css' %}">
+</head>
+<body>
+    <h1>Gestión del Condominio</h1>
+    <ul>
+        <li><a href="{% url 'propietarios:index' %}">Propietarios</a></li>
+        <li><a href="{% url 'vehiculos:index' %}">Vehiculos</a></li>
+        <li><a href="{% url 'registros:index' %}">Registros de Entrada y Salida</a></li>
+    </ul>
+</body>

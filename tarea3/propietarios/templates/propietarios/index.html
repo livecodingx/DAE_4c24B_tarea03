@@ -1,0 +1,40 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'propietarios/css/index.css' %}">
+    <title>Lista de Propietarios</title>
+</head>
+<body>
+    <h1>Lista de Propietarios</h1>
+    <div style="display: flex; justify-content: space-between;">
+        <a href="{% url 'propietarios:registrar_propietario' %}">Agregar Nuevo Propietario</a>
+        <a href="{% url 'condominio:index' %}">Pagina Principal</a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Departamento</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for propietario in propietarios %}
+            <tr>
+                <td>{{ propietario.nombre_completo }}</td>
+                <td>{{ propietario.numero_apartamento }}</td>
+                <td>{{ propietario.numero_telefono }}</td>
+                <td>{{ propietario.email }}</td>
+                <td>
+
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No hay propietarios registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>

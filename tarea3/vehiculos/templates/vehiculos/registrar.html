@@ -1,0 +1,45 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'vehiculos/css/registrar.css' %}">
+    <title>Registrar Vehículo</title>
+</head>
+<body>
+    <h1>Registrar Vehículo</h1>
+    {% if errors %}
+        <div class="error">
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <form method="POST" action="{% url 'vehiculos:registrar_vehiculo' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="matricula">Matrícula:</label>
+            <input type="text" name="matricula" maxlength="7" autocomplete="off" required>
+        </div>
+        <div class="form-group">
+            <label for="marca">Marca:</label>
+            <input type="text" name="marca" required>
+        </div>
+        <div class="form-group">
+            <label for="modelo">Modelo:</label>
+            <input type="text" name="modelo" required>
+        </div>
+        <div class="form-group">
+            <label for="color">Color:</label>
+            <input type="text" name="color" required>
+        </div>
+        <div class="form-group">
+            <label for="propietario">Propietario:</label>
+            <select name="propietario" required>
+                <option value="">Seleccione un propietario</option>
+                {% for propietario in propietarios %}
+                    <option value="{{ propietario.id }}">{{ propietario.nombre_completo }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit">Registrar</button>
+    </form>
+    <a href="{% url 'vehiculos:index' %}">Volver a la lista</a>
+</body>

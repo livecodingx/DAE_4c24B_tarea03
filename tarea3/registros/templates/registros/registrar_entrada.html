@@ -1,0 +1,25 @@
+
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'registros/css/registro.css' %}">
+    <title>Registrar Entrada</title>
+</head>
+<body>
+    <h1>Registrar Entrada de Vehículo</h1>
+    <form method="POST" action="{% url 'registros:registrar_entrada' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="vehiculo">Selecciona Vehículo:</label>
+            <select name="vehiculo" id="vehiculo" required>
+                <option value="">Seleccionar vehiculo</option>
+                {% for vehiculo in vehiculos %}
+                    <option value="{{ vehiculo.id }}">{{ vehiculo.matricula }} - {{ vehiculo.marca }} {{ vehiculo.modelo }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit">Registrar Entrada</button>
+    </form>
+
+    <a href="{% url 'registros:index' %}">Volver a registros</a>
+</body>
